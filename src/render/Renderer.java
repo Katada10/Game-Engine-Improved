@@ -32,6 +32,7 @@ public class Renderer {
 		mat.project();
 		for(GameObject o : objects)
 		{
+			o.rotation.setY(o.rotation.getY() + 1);
 			mat.model(o);
 			VAO.render(o);
 		}

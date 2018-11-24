@@ -9,6 +9,8 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 
 
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
+
 import java.util.*;
 import core.*;
 import render.Renderer;
@@ -29,6 +31,7 @@ public class Main {
 		
 		while ( !glfwWindowShouldClose(Window.window) ) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			GL30.glEnable(GL30.GL_DEPTH_TEST);
 		
 			GL20.glUseProgram(Renderer.getProgId());
 	
