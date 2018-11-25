@@ -10,7 +10,7 @@ public class Camera {
 	
 	public Camera()
 	{
-		position = new Vec3(0, 0, 10);
+		position = new Vec3(0, 3, 10);
 	}
 	
 	public boolean getKey(int key)

@@ -20,11 +20,13 @@ public class ShaderManager {
 	
 	private Camera cam;
 	
+	private int numOfLights;
 	private List<Light> lights;
 	
-	public ShaderManager(List<Light> lights)
+	public ShaderManager(List<Light> lights, int numOfLights)
 	{
 		this.lights = lights;
+		this.numOfLights = numOfLights;
 		cam = new Camera();
 	}
 	
@@ -32,9 +34,7 @@ public class ShaderManager {
 	public void render()
 	{
 		createViewProjection();
-		for (Light light : lights) {
-			light(light);
-		}
+		light(lights);
 	}
 	
 	public void model(GameObject o)
@@ -81,13 +81,18 @@ public class ShaderManager {
 		cam.move();
 		view.view(cam);
 		
+		uploadVec3("camPos", cam.position);
 		uploadMat("projection", projection);
 		uploadMat("view", view);
 	}
 
-	public void light(Light light) {
-		uploadVec3("light_pos", light.position);
-		uploadVec3("light_color", light.getColor());
-		uploadUni("light_strength", light.getStrength());
+	public void light(List<Light> lights) {
+		
+		for (int i = 0; i < numOfLights; i++) {
+			uploadVec3("light_pos[" +i+"]" , lights.get(i).position);
+		}
+		uploadUni("spec_Coef", 0f);
+		uploadUni("shine", 0f);
+		uploadVec3("light_color", lights.get(0).getColor());
 	}
 }

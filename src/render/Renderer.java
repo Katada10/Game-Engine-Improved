@@ -21,8 +21,9 @@ public class Renderer {
 		bind();
 		lights = new ArrayList<>();
 		
-		lights.add(new Light(new Vec3(0, 0, 3), new Vec3(1, 1, 1), 1f));
-		manager = new ShaderManager(lights);
+		lights.add(new Light(new Vec3(-5, 5, 0), new Vec3(1, 1, 1)));
+		lights.add(new Light(new Vec3(5, 5, 0), new Vec3(1, 1, 1)));
+		manager = new ShaderManager(lights, lights.size());
 	}
 	
 	private void bind()
@@ -39,7 +40,6 @@ public class Renderer {
 		
 		for(GameObject o : objects)
 		{
-			o.rotation.setY(o.rotation.getY() + 1);
 			manager.model(o);
 			VAO.render(o);
 		}
