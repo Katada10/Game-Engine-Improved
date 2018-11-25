@@ -42,15 +42,15 @@ public class GameObject {
 		this.model = m;
 		this.texture = t;
 		bindTexture();
-		position = new Vector3f(0 , 0, -5);
-		rotation = new Vector3f(0 , 0, 0);
+		position = new Vector3f();
+		rotation = new Vector3f();
 		scale = new Vector3f(1, 1, 1);
 	}
 	
 	public GameObject(Model m) {
 		this.model = m;
-		position = new Vector3f(0 , 0, 0);
-		rotation = new Vector3f(0 , 0, 0);
+		position = new Vector3f();
+		rotation = new Vector3f();
 		scale = new Vector3f(1, 1, 1);
 	}
 	

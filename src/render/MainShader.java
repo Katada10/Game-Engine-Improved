@@ -23,7 +23,7 @@ public class MainShader{
 	
 	public MainShader()
 	{	
-		progId = Loader.loadShaders("vert", "frag");
+		progId = Loader.loadShaders("main/vert", "main/frag");
 		cam = new Camera();
 		model = new Matrix4f();
 		view = new Matrix4f();

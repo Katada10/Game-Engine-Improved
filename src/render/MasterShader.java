@@ -8,10 +8,7 @@ import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL30;
 
-import core.Loader;
-import structures.Camera;
 import structures.GameObject;
-import structures.Light;
 
 public class MasterShader {
 

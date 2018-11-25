@@ -2,11 +2,7 @@ package render;
 
 import java.util.*;
 
-import org.joml.Vector3f;
-
-import core.Loader;
 import structures.GameObject;
-import structures.Light;
 
 public class Renderer {
 
