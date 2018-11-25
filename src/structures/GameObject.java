@@ -8,13 +8,14 @@ import static org.lwjgl.opengl.GL11.glBindTexture;
 import static org.lwjgl.opengl.GL11.glGenTextures;
 import static org.lwjgl.opengl.GL11.glTexImage2D;
 
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL30;
 
 import maths.Vec3;
 
 public class GameObject {
 	private Model model;
-	public Vec3 position, rotation, scale;
+	public Vector3f position, rotation, scale;
 	
 	public Model getModel() {
 		return model;
@@ -45,9 +46,9 @@ public class GameObject {
 		this.model = m;
 		this.texture = t;
 		bindTexture();
-		position = new Vec3(0 , 0, 0);
-		rotation = new Vec3(0 , 0, 0);
-		scale = new Vec3(1, 1, 1);
+		position = new Vector3f(0 , 0, -5);
+		rotation = new Vector3f(0 , 0, 0);
+		scale = new Vector3f(1, 1, 1);
 	}
 	
 }

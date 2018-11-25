@@ -13,6 +13,7 @@ public class Renderer {
 	private static int progId;
 
 	private List<Light> lights;
+
 	
 	public Renderer(List<GameObject> objects) {
 		this.objects = objects;
@@ -21,8 +22,7 @@ public class Renderer {
 		bind();
 		lights = new ArrayList<>();
 		
-		lights.add(new Light(new Vec3(-5, 5, 0), new Vec3(1, 1, 1)));
-		lights.add(new Light(new Vec3(5, 5, 0), new Vec3(1, 1, 1)));
+		lights.add(new Light(new Vec3(-5, 5, 1), new Vec3(1, 1, 1)));
 		manager = new ShaderManager(lights, lights.size());
 	}
 	
@@ -35,9 +35,9 @@ public class Renderer {
 	}
 	
 	public void render()
-	{
+	{		
 		manager.render();
-		
+	
 		for(GameObject o : objects)
 		{
 			manager.model(o);

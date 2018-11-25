@@ -21,9 +21,16 @@ public class Main {
 
 	List<GameObject> objects = new ArrayList<>();
 	
+	float[] verts = { -0.5f, -0.5f, 0f,
+			   0.5f, -0.5f, 0f,
+			   0.0f,  0.5f, 0f}, tex = {  -0.5f, -0.5f,
+					   0.5f, -0.5f, 0.0f,
+					   0.0f,  0.5f, 0.0f},  norm = {0 , 0 , 0};
+	int[] ind = {0, 1, 2};
+	
 	public void run()
 	{
-		objects.add(Loader.loadModel("monkey", "texture.jpg"));
+		objects.add(new GameObject(new Model(verts, tex, norm, ind), Loader.loadData("texture.jpg")));
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
 		Renderer r = new Renderer(objects);

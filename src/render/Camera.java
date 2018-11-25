@@ -7,10 +7,12 @@ import maths.Vec3;
 
 public class Camera {
 	public Vec3 position;
+	public Vec3 rotation;
 	
 	public Camera()
 	{
-		position = new Vec3(0, 3, 10);
+		position = new Vec3(0, 0, 0);
+		rotation = new Vec3(0, 0, 0);
 	}
 	
 	public boolean getKey(int key)
@@ -42,7 +44,10 @@ public class Camera {
 		{
 			position.setZ(position.getZ() - 0.1f);
 		}
-		
+		if(getKey(GLFW_KEY_Z))
+		{
+			rotation.setY(rotation.getY() + 0.1f);
+		}
 	}
 
 }

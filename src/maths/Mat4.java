@@ -70,7 +70,7 @@ public class Mat4 {
 		m[3][3] = 1;
 	}
 
-	public void perspective(float fov, float aspect, float near, float far) {
+	public Mat4 perspective(float fov, float aspect, float near, float far) {
 		float x = (float) Math.tan(fov / 2);
 		m[0][0] = (float) (1 / (aspect * x));
 		m[1][1] = (float) (1 / x);
@@ -78,6 +78,7 @@ public class Mat4 {
 		m[2][3] = -1;
 		m[3][3] = 0;
 		m[3][2] = ((-2 * far * near) / (far - near));
+		return this;
 	}
 
 	public FloatBuffer get() {
@@ -98,11 +99,5 @@ public class Mat4 {
 		fb.flip();
 		
 		return fb;
-	}
-	
-	
-	public void view(Camera cam)
-	{
-		translate(-cam.position.getX(), -cam.position.getY(), -cam.position.getZ());
 	}
 }
