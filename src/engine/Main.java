@@ -13,24 +13,17 @@ import org.lwjgl.opengl.GL30;
 
 import java.util.*;
 import core.*;
+import render.MasterShader;
 import render.Renderer;
 import structures.GameObject;
-import structures.Model;
 
 public class Main {
 
 	List<GameObject> objects = new ArrayList<>();
 	
-	float[] verts = { -0.5f, -0.5f, 0f,
-			   0.5f, -0.5f, 0f,
-			   0.0f,  0.5f, 0f}, tex = {  -0.5f, -0.5f,
-					   0.5f, -0.5f, 0.0f,
-					   0.0f,  0.5f, 0.0f},  norm = {0 , 0 , 0};
-	int[] ind = {0, 1, 2};
-	
 	public void run()
 	{
-		objects.add(new GameObject(new Model(verts, tex, norm, ind), Loader.loadData("texture.jpg")));
+		objects.add(Loader.loadModel("monkey", "texture.jpg"));
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
 		Renderer r = new Renderer(objects);
@@ -40,7 +33,7 @@ public class Main {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			GL30.glCullFace(GL30.GL_BACK);
 		
-			GL20.glUseProgram(Renderer.getProgId());
+			GL20.glUseProgram(MasterShader.progId);
 	
 			r.render();
 			

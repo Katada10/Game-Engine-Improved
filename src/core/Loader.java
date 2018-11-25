@@ -18,22 +18,21 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.*;
 
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.lwjgl.system.MemoryStack;
 
-import maths.Vec2;
-import maths.Vec3;
 import structures.GameObject;
 import structures.Model;
 import structures.Texture;
 
 public class Loader {
-	private static List<Vec3> verts = new ArrayList<>(), norms = new ArrayList<>();
-	private static List<Vec2> tex = new ArrayList<>();
+	private static List<Vector3f> verts = new ArrayList<>(), norms = new ArrayList<>();
+	private static List<Vector2f> tex = new ArrayList<>();
 	private static List<Integer> indices = new ArrayList<>();
 	
 	private static String read(String name) {
@@ -91,7 +90,7 @@ public class Loader {
 
 			/* Load image */
 			stbi_set_flip_vertically_on_load(true);
-			image = stbi_load("res/" + name, w, h, comp, 4);
+			image = stbi_load("res/images/" + name, w, h, comp, 4);
 			if (image == null) {
 				throw new RuntimeException("Failed to load a texture file!\n" + stbi_failure_reason());
 			}
@@ -104,13 +103,13 @@ public class Loader {
 		return new Texture(width, height, image);
 	}
 
-	private static float[] toArr2f(List<Vec2> list)
+	private static float[] toArr2f(List<Vector2f> list)
 	{
 		List<Float> f = new ArrayList<>();
 		
-		for (Vec2 v : list) {
-			f.add(v.getX());
-			f.add(v.getY());
+		for (Vector2f v : list) {
+			f.add(v.x);
+			f.add(v.y);
 		}
 		Float[] arr = new Float[f.size()];
 		arr = f.toArray(arr);
@@ -123,13 +122,13 @@ public class Loader {
 		return ret;
 	}
 	
-	private static float[] toArr(List<Vec3> list) {
+	private static float[] toArr(List<Vector3f> list) {
 		List<Float> f = new ArrayList<>();
 		
-		for (Vec3 v : list) {
-			f.add(v.getX());
-			f.add(v.getY());
-			f.add(v.getZ());
+		for (Vector3f v : list) {
+			f.add(v.x);
+			f.add(v.y);
+			f.add(v.z);
 		}
 		Float[] arr = new Float[f.size()];
 		arr = f.toArray(arr);
@@ -158,13 +157,13 @@ public class Loader {
 		String[] c;
 		int first = 0;
 		
-		List<Vec2> textures = new ArrayList<>();
-		List<Vec3> vertices = new ArrayList<>(), normals = new ArrayList<>();
+		List<Vector2f> textures = new ArrayList<>();
+		List<Vector3f> vertices = new ArrayList<>(), normals = new ArrayList<>();
 		List<String> combinations = new ArrayList<>();
 		String combo = "";
 		
 		try {
-			br = new BufferedReader(new FileReader(new File("res/" + name + ".obj")));
+			br = new BufferedReader(new FileReader(new File("res/models/" + name + ".obj")));
 			while ((line = br.readLine()) != null) {
 				if (line.startsWith("v ")) {
 					line = line.replace("v ", "");
@@ -176,7 +175,7 @@ public class Loader {
 					}}
 					
 					String[] arr = combo.split(",");
-					Vec3 v = new Vec3(Float.parseFloat(arr[0]), Float.parseFloat(arr[1]), Float.parseFloat(arr[2]));
+					Vector3f v = new Vector3f(Float.parseFloat(arr[0]), Float.parseFloat(arr[1]), Float.parseFloat(arr[2]));
 					verts.add(v);
 					
 					combo = "";
@@ -192,7 +191,7 @@ public class Loader {
 					}
 					
 					String[] arr = combo.split(",");
-					Vec2 v = new Vec2(Float.parseFloat(arr[0]), Float.parseFloat(arr[1]));
+					Vector2f v = new Vector2f(Float.parseFloat(arr[0]), Float.parseFloat(arr[1]));
 					tex.add(v);
 				} else if (line.startsWith("vn")) {
 					combo = "";
@@ -205,7 +204,7 @@ public class Loader {
 					}
 					
 					String[] arr = combo.split(",");
-					Vec3 v = new Vec3(Float.parseFloat(arr[0]), Float.parseFloat(arr[1]), Float.parseFloat(arr[2]));
+					Vector3f v = new Vector3f(Float.parseFloat(arr[0]), Float.parseFloat(arr[1]), Float.parseFloat(arr[2]));
 					norms.add(v);
 				} else if (line.startsWith("f")) {
 					line = line.replace("f", "");

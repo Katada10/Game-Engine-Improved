@@ -2,8 +2,8 @@ package render;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
-
 import structures.GameObject;
+import structures.Model;
 
 public class VAO {
 
@@ -35,14 +35,14 @@ public class VAO {
 		return vbo;
 	}
 
-	public static void render(GameObject o)
+	public static void render(Model o)
 	{
 		GL30.glEnableVertexAttribArray(0);
 		GL30.glEnableVertexAttribArray(1);
 		GL30.glEnableVertexAttribArray(2);
 		
-		GL30.glBindBuffer(GL30.GL_ELEMENT_ARRAY_BUFFER, o.getModel().ebo);
-		GL30.glDrawElements(GL30.GL_TRIANGLES, o.getModel().getInd().length, GL11.GL_UNSIGNED_INT, 0);
+		GL30.glBindBuffer(GL30.GL_ELEMENT_ARRAY_BUFFER, o.ebo);
+		GL30.glDrawElements(GL30.GL_TRIANGLES, o.getInd().length, GL11.GL_UNSIGNED_INT, 0);
 
 		GL30.glDisableVertexAttribArray(0);
 		GL30.glDisableVertexAttribArray(1);

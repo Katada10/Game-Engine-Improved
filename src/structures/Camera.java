@@ -1,18 +1,19 @@
-package render;
+package structures;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import org.joml.Vector3f;
+
 import core.Window;
-import maths.Vec3;
 
 public class Camera {
-	public Vec3 position;
-	public Vec3 rotation;
+	public Vector3f position;
+	public Vector3f rotation;
 	
 	public Camera()
 	{
-		position = new Vec3(0, 0, 0);
-		rotation = new Vec3(0, 0, 0);
+		position = new Vector3f(0, 0, 0);
+		rotation = new Vector3f(0, 0, 0);
 	}
 	
 	public boolean getKey(int key)
@@ -31,22 +32,18 @@ public class Camera {
 	{
 		if(getKey(GLFW_KEY_A))
 		{
-			position.setX(position.getX() - 0.1f);
+			position.x  -= 0.1f;
 		}if(getKey(GLFW_KEY_S))
 		{
-			position.setZ(position.getZ() + 0.1f);
+			position.z += 0.1f;
 		}
 		if(getKey(GLFW_KEY_D))
 		{
-			position.setX(position.getX() + 0.1f);
+			position.x += 0.1f;
 		}
 		if(getKey(GLFW_KEY_W))
 		{
-			position.setZ(position.getZ() - 0.1f);
-		}
-		if(getKey(GLFW_KEY_Z))
-		{
-			rotation.setY(rotation.getY() + 0.1f);
+			position.z -= 0.1f;
 		}
 	}
 

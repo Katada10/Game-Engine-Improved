@@ -2,28 +2,24 @@ package render;
 
 import java.util.*;
 
+import org.joml.Vector3f;
+
 import core.Loader;
-import maths.Vec3;
 import structures.GameObject;
+import structures.Light;
 
 public class Renderer {
 
 	private List<GameObject> objects;
-	private ShaderManager manager;
-	private static int progId;
-
-	private List<Light> lights;
-
+	private MasterShader manager;
 	
 	public Renderer(List<GameObject> objects) {
 		this.objects = objects;
-		progId = Loader.loadShaders("vert", "frag");
+		
 		VAO.init();
 		bind();
-		lights = new ArrayList<>();
 		
-		lights.add(new Light(new Vec3(-5, 5, 1), new Vec3(1, 1, 1)));
-		manager = new ShaderManager(lights, lights.size());
+		manager = new MasterShader();
 	}
 	
 	private void bind()
@@ -35,14 +31,8 @@ public class Renderer {
 	}
 	
 	public void render()
-	{		
-		manager.render();
-	
-		for(GameObject o : objects)
-		{
-			manager.model(o);
-			VAO.render(o);
-		}
+	{	
+		manager.render(objects);
 	}
 	
 	public void cleanUp()
@@ -51,10 +41,5 @@ public class Renderer {
 		{
 			VAO.clean(o);
 		}
-	}
-	
-	public static int getProgId()
-	{
-		return progId;
 	}
 }

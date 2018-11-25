@@ -1,7 +1,5 @@
 package structures;
 
-import static org.lwjgl.opengl.GL11.GL_RGBA;
-import static org.lwjgl.opengl.GL11.GL_RGBA8;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
 import static org.lwjgl.opengl.GL11.glBindTexture;
@@ -10,8 +8,6 @@ import static org.lwjgl.opengl.GL11.glTexImage2D;
 
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL30;
-
-import maths.Vec3;
 
 public class GameObject {
 	private Model model;
@@ -47,6 +43,13 @@ public class GameObject {
 		this.texture = t;
 		bindTexture();
 		position = new Vector3f(0 , 0, -5);
+		rotation = new Vector3f(0 , 0, 0);
+		scale = new Vector3f(1, 1, 1);
+	}
+	
+	public GameObject(Model m) {
+		this.model = m;
+		position = new Vector3f(0 , 0, 0);
 		rotation = new Vector3f(0 , 0, 0);
 		scale = new Vector3f(1, 1, 1);
 	}
