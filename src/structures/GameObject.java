@@ -47,7 +47,7 @@ public class GameObject {
 		bindTexture();
 		position = new Vec3(0 , 0, 0);
 		rotation = new Vec3(0 , 0, 0);
-		scale = new Vec3(1 , 1, 1);
+		scale = new Vec3(1 , 1.5f, 1);
 	}
 	
 }

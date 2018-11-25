@@ -3,20 +3,26 @@ package render;
 import java.util.*;
 
 import core.Loader;
+import maths.Vec3;
 import structures.GameObject;
 
 public class Renderer {
 
 	private List<GameObject> objects;
-	private MatManager mat;
+	private ShaderManager manager;
 	private static int progId;
 
+	private List<Light> lights;
+	
 	public Renderer(List<GameObject> objects) {
 		this.objects = objects;
 		progId = Loader.loadShaders("vert", "frag");
 		VAO.init();
 		bind();
-		mat = new MatManager();
+		lights = new ArrayList<>();
+		
+		lights.add(new Light(new Vec3(0, 0, 3), new Vec3(1, 1, 1), 1f));
+		manager = new ShaderManager(lights);
 	}
 	
 	private void bind()
@@ -29,11 +35,12 @@ public class Renderer {
 	
 	public void render()
 	{
-		mat.project();
+		manager.render();
+		
 		for(GameObject o : objects)
 		{
 			o.rotation.setY(o.rotation.getY() + 1);
-			mat.model(o);
+			manager.model(o);
 			VAO.render(o);
 		}
 	}

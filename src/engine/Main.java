@@ -23,15 +23,15 @@ public class Main {
 	
 	public void run()
 	{
-		//Loader.loadModel("cube", "texture.jpg")
 		objects.add(Loader.loadModel("monkey", "texture.jpg"));
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
 		Renderer r = new Renderer(objects);
-		
+		GL30.glEnable(GL30.GL_CULL_FACE);
+		GL30.glEnable(GL30.GL_DEPTH_TEST);
 		while ( !glfwWindowShouldClose(Window.window) ) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			GL30.glEnable(GL30.GL_DEPTH_TEST);
+			GL30.glCullFace(GL30.GL_BACK);
 		
 			GL20.glUseProgram(Renderer.getProgId());
 	

@@ -1,5 +1,9 @@
 package maths;
 
+import java.nio.FloatBuffer;
+
+import org.lwjgl.BufferUtils;
+
 public class Vec3 {
 	
 	private float x, y, z;
@@ -39,6 +43,5 @@ public class Vec3 {
 	public void setZ(float z) {
 		this.z = z;
 	}
-	
 
 }
