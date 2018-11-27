@@ -33,8 +33,6 @@ public class Main {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			GL30.glCullFace(GL30.GL_BACK);
 		
-			GL20.glUseProgram(MasterShader.progId);
-	
 			r.render();
 			
 			glfwSwapBuffers(Window.window); 

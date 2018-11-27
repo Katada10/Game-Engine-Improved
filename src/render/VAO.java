@@ -1,20 +1,23 @@
 package render;
 
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glGenTextures;
+import static org.lwjgl.opengl.GL11.glTexImage2D;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 import structures.GameObject;
 import structures.Model;
+import structures.Texture;
 
 public class VAO {
-
-	private static int vaoId;
-
 	public static void init() {
-		vaoId = GL30.glGenVertexArrays();
+		int vaoId = GL30.glGenVertexArrays();
 		GL30.glBindVertexArray(vaoId);
 	}
 
-	private static int loadFloat(float[] data, int index, int size) {
+	public static int loadFloat(float[] data, int index, int size) {
 		int vbo = GL30.glGenBuffers();
 		GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, vbo);
 		GL30.glBufferData(GL30.GL_ARRAY_BUFFER, data, GL30.GL_STATIC_DRAW);
@@ -35,6 +38,16 @@ public class VAO {
 		return vbo;
 	}
 
+	public static void render(int vbo, float[] data)
+	{
+		GL30.glEnableVertexAttribArray(3);
+		
+		GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, vbo);
+		GL30.glDrawArrays(GL30.GL_TRIANGLES, 0, data.length / 3);
+
+		GL30.glDisableVertexAttribArray(3);
+	}
+	
 	public static void render(Model o)
 	{
 		GL30.glEnableVertexAttribArray(0);
@@ -63,5 +76,18 @@ public class VAO {
 		o.getModel().nbo = loadFloat(o.getModel().getNorms(), 2, 3);
 		o.getModel().ebo = loadInt(o.getModel().getInd());
 	}
-
+	
+	public static int createTexId(int target)
+	{
+		int id = glGenTextures();
+		glBindTexture(target, id);
+		return id;
+	}
+	
+	public static void bindTexture(int type, Texture texture)
+	{
+		glTexImage2D(type, 0, GL30.GL_RGBA, 
+				texture.getWidth(), texture.getHeight(), 0, GL30.GL_RGBA, 
+				GL_UNSIGNED_BYTE, texture.getData());
+	}
 }

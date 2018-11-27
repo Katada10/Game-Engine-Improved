@@ -1,0 +1,11 @@
+#version 330 core
+in vec3 frag_coord;
+
+out vec3 color;
+
+uniform samplerCube skybox;
+
+void main()
+{
+	color = texture(skybox, frag_coord);
+}

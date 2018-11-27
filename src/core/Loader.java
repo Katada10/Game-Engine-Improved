@@ -39,7 +39,7 @@ public class Loader {
 		String src = "";
 
 		try {
-			FileReader reader = new FileReader(new File("shaders/" + name + ".txt"));
+			FileReader reader = new FileReader(new File("shaders/" + name + ".gls"));
 			int i;
 			while ((i = reader.read()) != -1) {
 				src += (char) i;

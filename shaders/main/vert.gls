@@ -1,0 +1,20 @@
+#version 330 core
+layout (location = 0) in vec3 in_vert;
+layout (location = 1) in vec2 in_uv;
+layout (location = 2) in vec3 in_norm;
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
+out vec2 frag_uv;
+out vec3 normal;
+out vec3 position; 
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(in_vert, 1);
+	position = (model * vec4(in_vert, 1)).xyz;
+	frag_uv = in_uv;
+	normal = in_norm;
+}

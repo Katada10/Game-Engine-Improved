@@ -12,18 +12,14 @@ public class Renderer {
 	public Renderer(List<GameObject> objects) {
 		this.objects = objects;
 		
-		VAO.init();
+		manager = new MasterShader();
 		bind();
 		
-		manager = new MasterShader();
 	}
 	
 	private void bind()
 	{
-		for(GameObject o : objects)
-		{
-			VAO.bindRender(o);
-		}
+		manager.bind(objects);
 	}
 	
 	public void render()
@@ -33,9 +29,6 @@ public class Renderer {
 	
 	public void cleanUp()
 	{
-		for(GameObject o : objects)
-		{
-			VAO.clean(o);
-		}
+		manager.clean(objects);
 	}
 }
