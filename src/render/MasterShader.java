@@ -16,19 +16,9 @@ public class MasterShader {
 	private MainShader mainShader;
 	private SkyBoxShader skyBoxShader;
 	
-	private int mainProgId;
-	private int skyBoxId;
-	
 	public MasterShader() {
 		mainShader = new MainShader(1f, 10f);
 		skyBoxShader = new SkyBoxShader();
-		mainProgId = mainShader.getProgId();
-		skyBoxId = skyBoxShader.progId;
-	}
-
-	private void use(int id)
-	{
-		GL20.glUseProgram(id);
 	}
 	
 	public void bind(List<GameObject> objects)
@@ -42,7 +32,7 @@ public class MasterShader {
 	
 	public void render(List<GameObject> objects) {
 		
-		use(mainProgId);
+		GL20.glUseProgram(mainShader.getProgId());
 		mainShader.render();
 		
 		for(GameObject o : objects)
@@ -52,7 +42,7 @@ public class MasterShader {
 			VAO.render(o.getModel());
 		}
 		
-		use(skyBoxId);
+		GL20.glUseProgram(skyBoxShader.progId);
 		skyBoxShader.render();
 	}
 	

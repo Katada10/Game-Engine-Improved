@@ -14,7 +14,6 @@ public class Renderer {
 		
 		manager = new MasterShader();
 		bind();
-		
 	}
 	
 	private void bind()

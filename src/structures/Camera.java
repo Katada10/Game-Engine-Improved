@@ -12,7 +12,7 @@ public class Camera {
 	
 	public Camera()
 	{
-		position = new Vector3f(0, 0, 0);
+		position = new Vector3f(0, 0, 5);
 		rotation = new Vector3f(0, 0, 0);
 	}
 	
