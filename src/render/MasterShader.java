@@ -20,7 +20,7 @@ public class MasterShader {
 	private int skyBoxId;
 	
 	public MasterShader() {
-		mainShader = new MainShader();
+		mainShader = new MainShader(1f, 10f);
 		skyBoxShader = new SkyBoxShader();
 		mainProgId = mainShader.getProgId();
 		skyBoxId = skyBoxShader.progId;
@@ -47,6 +47,7 @@ public class MasterShader {
 		
 		for(GameObject o : objects)
 		{
+			o.rotation.y -= 0.01f;
 			mainShader.model(o);
 			VAO.render(o.getModel());
 		}

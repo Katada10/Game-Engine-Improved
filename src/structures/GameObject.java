@@ -23,14 +23,14 @@ public class GameObject {
 		GL30.glTexParameteri(GL30.GL_TEXTURE_2D, GL30.GL_TEXTURE_MAG_FILTER, GL30.GL_NEAREST);
 
 		VAO.bindTexture(GL30.GL_TEXTURE_2D, t);
-		position = new Vector3f(-5, 0, 0);
+		position = new Vector3f();
 		rotation = new Vector3f();
 		scale = new Vector3f(1, 1, 1);
 	}
 	
 	public GameObject(Model m) {
 		this.model = m;
-		position = new Vector3f(0, 0, 0);
+		position = new Vector3f();
 		rotation = new Vector3f();
 		scale = new Vector3f(0.2f, .2f, .2f);
 	}

@@ -1,12 +1,17 @@
 package render;
 
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
+import static org.lwjgl.opengl.GL11.glDisable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.lwjgl.opengl.GL30;
 
 import core.Loader;
+import core.Window;
 import structures.Camera;
 import structures.GameObject;
 import structures.Light;
@@ -20,14 +25,14 @@ public class MainShader{
 	private static List<Light> lights;
 	
 	private static int progId;
-	
+	private float specular, shine;
 	
 	public int getProgId()
 	{
 		return progId;
 	}
 	
-	public MainShader()
+	public MainShader(float specular, float shine)
 	{	
 		progId = Loader.loadShaders("main/vert", "main/frag");
 		VAO.init();
@@ -37,11 +42,16 @@ public class MainShader{
 		projection = new Matrix4f();
 		
 		lights = new ArrayList<>();
-		lights.add(new Light(new Vector3f(-5, 5, 1), new Vector3f(1, 1, 1)));
+		lights.add(new Light(new Vector3f(-5, 3, 5), new Vector3f(1, 1, 1)));
+	
+		this.specular = specular;
+		this.shine = shine;
 	}
 	
 	public void render()
 	{
+
+		GL30.glEnable(GL_CULL_FACE);
 		createViewProjection(progId);
 		light(lights);
 	}
@@ -49,7 +59,7 @@ public class MainShader{
 
 	public static void project(int progId)
 	{
-		projection.identity().perspective((float) Math.toRadians(60), 900 / 720, 0.1f, 100f);
+		projection.identity().perspective((float) Math.toRadians(60), Window.WIDTH / Window.HEIGHT, 0.1f, 100f);
 		MasterShader.uploadMat("projection", projection, progId);
 	}
 	
@@ -61,7 +71,7 @@ public class MainShader{
 				.rotate(cam.rotation.z, new Vector3f(0, 0, 1));
 				
 
-		// uploadVec3("camPos", cam.position);
+		MasterShader.uploadVec3("camPos", cam.position, progId);
 		
 		MasterShader.uploadMat("view", view, progId);
 	}
@@ -78,8 +88,8 @@ public class MainShader{
 		for (int i = 0; i < lights.size(); i++) {
 			MasterShader.uploadVec3("light_pos[" + i + "]", lights.get(i).position, progId);
 		}
-		MasterShader.uploadUni("spec_Coef", 0f, progId);
-		MasterShader.uploadUni("shine", 0f, progId);
+		MasterShader.uploadUni("spec_Coef", specular, progId);
+		MasterShader.uploadUni("shine", shine, progId);
 		MasterShader.uploadVec3("light_color", lights.get(0).getColor(), progId);
 	}
 }

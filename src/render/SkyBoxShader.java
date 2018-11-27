@@ -11,47 +11,47 @@ public class SkyBoxShader {
 
 	private int vbo, tbo;
 	private float[] verts = {
-			-1.0f,  1.0f, -1.0f,
-		    -1.0f, -1.0f, -1.0f,
-		     1.0f, -1.0f, -1.0f,
-		     1.0f, -1.0f, -1.0f,
-		     1.0f,  1.0f, -1.0f,
-		    -1.0f,  1.0f, -1.0f,
+			-20.0f,  20.0f, -20.0f,
+		    -20.0f, -20.0f, -20.0f,
+		     20.0f, -20.0f, -20.0f,
+		     20.0f, -20.0f, -20.0f,
+		     20.0f,  20.0f, -20.0f,
+		    -20.0f,  20.0f, -20.0f,
 
-		    -1.0f, -1.0f,  1.0f,
-		    -1.0f, -1.0f, -1.0f,
-		    -1.0f,  1.0f, -1.0f,
-		    -1.0f,  1.0f, -1.0f,
-		    -1.0f,  1.0f,  1.0f,
-		    -1.0f, -1.0f,  1.0f,
+		    -20.0f, -20.0f,  20.0f,
+		    -20.0f, -20.0f, -20.0f,
+		    -20.0f,  20.0f, -20.0f,
+		    -20.0f,  20.0f, -20.0f,
+		    -20.0f,  20.0f,  20.0f,
+		    -20.0f, -20.0f,  20.0f,
 
-		     1.0f, -1.0f, -1.0f,
-		     1.0f, -1.0f,  1.0f,
-		     1.0f,  1.0f,  1.0f,
-		     1.0f,  1.0f,  1.0f,
-		     1.0f,  1.0f, -1.0f,
-		     1.0f, -1.0f, -1.0f,
+		     20.0f, -20.0f, -20.0f,
+		     20.0f, -20.0f,  20.0f,
+		     20.0f,  20.0f,  20.0f,
+		     20.0f,  20.0f,  20.0f,
+		     20.0f,  20.0f, -20.0f,
+		     20.0f, -20.0f, -20.0f,
 
-		    -1.0f, -1.0f,  1.0f,
-		    -1.0f,  1.0f,  1.0f,
-		     1.0f,  1.0f,  1.0f,
-		     1.0f,  1.0f,  1.0f,
-		     1.0f, -1.0f,  1.0f,
-		    -1.0f, -1.0f,  1.0f,
+		    -20.0f, -20.0f,  20.0f,
+		    -20.0f,  20.0f,  20.0f,
+		     20.0f,  20.0f,  20.0f,
+		     20.0f,  20.0f,  20.0f,
+		     20.0f, -20.0f,  20.0f,
+		    -20.0f, -20.0f,  20.0f,
 
-		    -1.0f,  1.0f, -1.0f,
-		     1.0f,  1.0f, -1.0f,
-		     1.0f,  1.0f,  1.0f,
-		     1.0f,  1.0f,  1.0f,
-		    -1.0f,  1.0f,  1.0f,
-		    -1.0f,  1.0f, -1.0f,
+		    -20.0f,  20.0f, -20.0f,
+		     20.0f,  20.0f, -20.0f,
+		     20.0f,  20.0f,  20.0f,
+		     20.0f,  20.0f,  20.0f,
+		    -20.0f,  20.0f,  20.0f,
+		    -20.0f,  20.0f, -20.0f,
 
-		    -1.0f, -1.0f, -1.0f,
-		    -1.0f, -1.0f,  1.0f,
-		     1.0f, -1.0f, -1.0f,
-		     1.0f, -1.0f, -1.0f,
-		    -1.0f, -1.0f,  1.0f,
-		     1.0f, -1.0f,  1.0f
+		    -20.0f, -20.0f, -20.0f,
+		    -20.0f, -20.0f,  20.0f,
+		     20.0f, -20.0f, -20.0f,
+		     20.0f, -20.0f, -20.0f,
+		    -20.0f, -20.0f,  20.0f,
+		     20.0f, -20.0f,  20.0f
 	};
 	
 	public int progId;
@@ -69,7 +69,7 @@ public class SkyBoxShader {
 		tbo = VAO.createTexId(GL_TEXTURE_CUBE_MAP);
 		
 		for (int i = 0; i < textures.length; i++) {
-			textures[i] = Loader.loadData("alpha-island_"+i+".tga");
+			textures[i] = Loader.loadData(i+".png");
 		}
 		
 		VAO.bindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X, textures[0]);
@@ -90,7 +90,8 @@ public class SkyBoxShader {
 	
 	public void render()
 	{
-		MainShader.createViewProjection(progId);
+		glDisable(GL_CULL_FACE);
+		MainShader.project(progId);
 		GL30.glBindTexture(GL30.GL_TEXTURE_CUBE_MAP, tbo);
 		VAO.render(vbo, verts);
 	}
