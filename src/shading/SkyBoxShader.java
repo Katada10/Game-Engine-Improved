@@ -1,10 +1,12 @@
-package render;
+package shading;
 
 import static org.lwjgl.opengl.GL30.*;
 
 import org.lwjgl.opengl.GL30;
 
 import core.Loader;
+import render.ShaderUtils;
+import render.VAO;
 import structures.Texture;
 
 public class SkyBoxShader {
@@ -81,7 +83,7 @@ public class SkyBoxShader {
 	public void render()
 	{
 		glDisable(GL_CULL_FACE);
-		MainShader.project(progId);
+		ShaderUtils.project(progId);
 		GL30.glBindTexture(GL30.GL_TEXTURE_CUBE_MAP, tbo);
 		VAO.render(vbo, verts);
 	}

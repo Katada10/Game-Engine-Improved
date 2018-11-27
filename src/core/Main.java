@@ -1,4 +1,4 @@
-package engine;
+package core;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
@@ -13,8 +13,7 @@ import org.lwjgl.opengl.GL30;
 
 import java.util.*;
 import core.*;
-import render.MasterShader;
-import render.Renderer;
+import shading.MasterShader;
 import structures.GameObject;
 
 public class Main {
@@ -26,7 +25,7 @@ public class Main {
 		objects.add(Loader.loadModel("monkey", "texture.jpg"));
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
-		Renderer r = new Renderer(objects);
+		MasterShader r = new MasterShader(objects);
 		GL30.glEnable(GL30.GL_CULL_FACE);
 		GL30.glEnable(GL30.GL_DEPTH_TEST);
 		while ( !glfwWindowShouldClose(Window.window) ) {
