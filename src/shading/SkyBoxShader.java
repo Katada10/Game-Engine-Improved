@@ -84,6 +84,7 @@ public class SkyBoxShader {
 	{
 		glDisable(GL_CULL_FACE);
 		ShaderUtils.project(progId);
+		ShaderUtils.skyView(progId);
 		GL30.glBindTexture(GL30.GL_TEXTURE_CUBE_MAP, tbo);
 		VAO.render(vbo, verts);
 	}

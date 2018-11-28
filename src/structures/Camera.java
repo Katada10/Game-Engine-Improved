@@ -45,6 +45,14 @@ public class Camera {
 		{
 			position.z -= 0.1f;
 		}
+		if(getKey(GLFW_KEY_Z))
+		{
+			rotation.y -= 0.05f;
+		}
+		if(getKey(GLFW_KEY_C))
+		{
+			rotation.y += 0.05f;
+		}
 	}
 
 }
