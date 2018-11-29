@@ -12,11 +12,17 @@ import structures.Model;
 import structures.Texture;
 
 public class VAO {
+	private static int vaoId;
 	public static void init() {
-		int vaoId = GL30.glGenVertexArrays();
+		vaoId = GL30.glGenVertexArrays();
 		GL30.glBindVertexArray(vaoId);
 	}
 
+	public static void destroy()
+	{
+		GL30.glDeleteVertexArrays(vaoId);
+	}
+	
 	public static int loadFloat(float[] data, int index, int size) {
 		int vbo = GL30.glGenBuffers();
 		GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, vbo);

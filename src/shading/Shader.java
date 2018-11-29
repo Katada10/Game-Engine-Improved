@@ -1,0 +1,16 @@
+package shading;
+
+import core.Loader;
+
+public abstract class Shader {
+	
+	public int progId;
+	
+	public Shader(String vert, String frag)
+	{
+		progId = Loader.loadShaders(vert, frag);
+	}
+	
+	public abstract void render();
+	public abstract void clean();
+}

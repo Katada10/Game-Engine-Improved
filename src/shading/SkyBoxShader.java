@@ -2,65 +2,65 @@ package shading;
 
 import static org.lwjgl.opengl.GL30.*;
 
-import org.lwjgl.opengl.GL30;
 
 import core.Loader;
 import render.ShaderUtils;
 import render.VAO;
 import structures.Texture;
 
-public class SkyBoxShader {
+public class SkyBoxShader extends Shader{
 
 	private int vbo, tbo;
+	private String[] fileNames;
+	
 	private float[] verts = {
-			-30.0f,  30.0f, -30.0f,
-		    -30.0f, -30.0f, -30.0f,
-		     30.0f, -30.0f, -30.0f,
-		     30.0f, -30.0f, -30.0f,
-		     30.0f,  30.0f, -30.0f,
-		    -30.0f,  30.0f, -30.0f,
+			-50.0f,  50.0f, -50.0f,
+		    -50.0f, -50.0f, -50.0f,
+		     50.0f, -50.0f, -50.0f,
+		     50.0f, -50.0f, -50.0f,
+		     50.0f,  50.0f, -50.0f,
+		    -50.0f,  50.0f, -50.0f,
 
-		    -30.0f, -30.0f,  30.0f,
-		    -30.0f, -30.0f, -30.0f,
-		    -30.0f,  30.0f, -30.0f,
-		    -30.0f,  30.0f, -30.0f,
-		    -30.0f,  30.0f,  30.0f,
-		    -30.0f, -30.0f,  30.0f,
+		    -50.0f, -50.0f,  50.0f,
+		    -50.0f, -50.0f, -50.0f,
+		    -50.0f,  50.0f, -50.0f,
+		    -50.0f,  50.0f, -50.0f,
+		    -50.0f,  50.0f,  50.0f,
+		    -50.0f, -50.0f,  50.0f,
 
-		     30.0f, -30.0f, -30.0f,
-		     30.0f, -30.0f,  30.0f,
-		     30.0f,  30.0f,  30.0f,
-		     30.0f,  30.0f,  30.0f,
-		     30.0f,  30.0f, -30.0f,
-		     30.0f, -30.0f, -30.0f,
+		     50.0f, -50.0f, -50.0f,
+		     50.0f, -50.0f,  50.0f,
+		     50.0f,  50.0f,  50.0f,
+		     50.0f,  50.0f,  50.0f,
+		     50.0f,  50.0f, -50.0f,
+		     50.0f, -50.0f, -50.0f,
 
-		    -30.0f, -30.0f,  30.0f,
-		    -30.0f,  30.0f,  30.0f,
-		     30.0f,  30.0f,  30.0f,
-		     30.0f,  30.0f,  30.0f,
-		     30.0f, -30.0f,  30.0f,
-		    -30.0f, -30.0f,  30.0f,
+		    -50.0f, -50.0f,  50.0f,
+		    -50.0f,  50.0f,  50.0f,
+		     50.0f,  50.0f,  50.0f,
+		     50.0f,  50.0f,  50.0f,
+		     50.0f, -50.0f,  50.0f,
+		    -50.0f, -50.0f,  50.0f,
 
-		    -30.0f,  30.0f, -30.0f,
-		     30.0f,  30.0f, -30.0f,
-		     30.0f,  30.0f,  30.0f,
-		     30.0f,  30.0f,  30.0f,
-		    -30.0f,  30.0f,  30.0f,
-		    -30.0f,  30.0f, -30.0f,
+		    -50.0f,  50.0f, -50.0f,
+		     50.0f,  50.0f, -50.0f,
+		     50.0f,  50.0f,  50.0f,
+		     50.0f,  50.0f,  50.0f,
+		    -50.0f,  50.0f,  50.0f,
+		    -50.0f,  50.0f, -50.0f,
 
-		    -30.0f, -30.0f, -30.0f,
-		    -30.0f, -30.0f,  30.0f,
-		     30.0f, -30.0f, -30.0f,
-		     30.0f, -30.0f, -30.0f,
-		    -30.0f, -30.0f,  30.0f,
-		     30.0f, -30.0f,  30.0f
+		    -50.0f, -50.0f, -50.0f,
+		    -50.0f, -50.0f,  50.0f,
+		     50.0f, -50.0f, -50.0f,
+		     50.0f, -50.0f, -50.0f,
+		    -50.0f, -50.0f,  50.0f,
+		     50.0f, -50.0f,  50.0f
 	};
 	
-	public int progId;
-	
-	public SkyBoxShader()
+	public SkyBoxShader(String vertPath, String fragPath, String[] fileNames)
 	{
-		progId = Loader.loadShaders("skybox/vert", "skybox/frag");
+		super(vertPath, fragPath);
+		this.fileNames = fileNames;
 		vbo = VAO.loadFloat(verts, 3, 3);
 		loadCubeMap();
 	}
@@ -71,9 +71,8 @@ public class SkyBoxShader {
 		tbo = VAO.createTexId(GL_TEXTURE_CUBE_MAP);
 		
 		for (int i = 0; i < textures.length; i++) {
-			textures[i] = Loader.loadData(i+".png");
+			textures[i] = Loader.loadData(fileNames[i] +".png");
 			VAO.bindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i, textures[i]);
-		
 		}
 		
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -85,7 +84,13 @@ public class SkyBoxShader {
 		glDisable(GL_CULL_FACE);
 		ShaderUtils.project(progId);
 		ShaderUtils.skyView(progId);
-		GL30.glBindTexture(GL30.GL_TEXTURE_CUBE_MAP, tbo);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, tbo);
 		VAO.render(vbo, verts);
+	}
+
+	@Override
+	public void clean() {
+		glDeleteBuffers(vbo);
+		glDeleteBuffers(tbo);
 	}
 }

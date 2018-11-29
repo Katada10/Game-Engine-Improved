@@ -4,16 +4,12 @@ import org.joml.Vector3f;
 
 public class Light {
 	public Vector3f position;
-	private Vector3f color;
+	public float shine, specular;
 	
-	public Light(Vector3f pos, Vector3f color)
-	{
-		this.position = pos;
-		this.color = color;
-	}
-
-	public Vector3f getColor()
-	{
-		return color;
+	
+	public Light(Vector3f position,  float shine, float specular) {
+		this.position = position;
+		this.shine = shine;
+		this.specular = specular;
 	}
 }

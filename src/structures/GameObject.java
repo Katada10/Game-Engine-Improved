@@ -32,7 +32,7 @@ public class GameObject {
 		this.model = m;
 		position = new Vector3f();
 		rotation = new Vector3f();
-		scale = new Vector3f(0.2f, .2f, .2f);
+		scale = new Vector3f(1, 1, 1);
 	}
 	
 }
