@@ -22,7 +22,12 @@ public class Main {
 	
 	public void run()
 	{
-		objects.add(Loader.loadModel("monkey", "texture.jpg"));
+		GameObject o1 = Loader.loadModel("cube", "texture.jpg");
+		GameObject o2 = Loader.loadModel("cube", "texture.jpg");
+		
+		o1.position.x = 2;
+		objects.add(o1);
+		objects.add(o2);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
 		MasterShader r = new MasterShader(objects);

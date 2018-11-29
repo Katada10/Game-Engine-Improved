@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL30;
 
 import core.Loader;
 import core.Window;
+import game.Physics;
 import render.LightManager;
 import render.ShaderUtils;
 import render.VAO;
@@ -36,7 +37,7 @@ public class MainShader{
 		this.objects = objects;
 		lightManager = new LightManager(2f, 10f);
 		progId = Loader.loadShaders("main/vert", "main/frag");
-		
+	//	physics = new Physics(objects);
 		model = new Matrix4f();
 		bind();
 	}
@@ -49,9 +50,9 @@ public class MainShader{
 		
 		lightManager.uploadLights(progId);
 		
+		
 		for(GameObject o : objects)
 		{
-			o.rotation.y -= 0.01f;
 			model(o);
 			VAO.render(o.getModel());
 		}
