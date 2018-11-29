@@ -8,12 +8,9 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 
-import org.joml.Vector3f;
-import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import java.util.*;
-import core.*;
 import shading.MasterShader;
 import structures.GameObject;
 import structures.Light;
@@ -24,8 +21,9 @@ public interface GameEngine {
 	List<Light> lights = new ArrayList<>();
 	String[] names = new String[6];
 	
-	public void addStuff(List<GameObject> objects, List<Light> lights, String[] names);
+	public void addStuff(List<GameObject> objects, List<Light> lights, String[] skyBoxTexNames);
 	public void addShaders(MasterShader r);
+	public void transform(List<GameObject> objects);
 	
 	private void run() {
 		addStuff(objects, lights, names);
@@ -42,6 +40,7 @@ public interface GameEngine {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			GL30.glCullFace(GL30.GL_BACK);
 
+			transform(objects);
 			r.render();
 
 			glfwSwapBuffers(Window.window);
@@ -50,7 +49,7 @@ public interface GameEngine {
 		}
 	}
 
-	public default void start(int width, int height, String title) {
+	default void start(int width, int height, String title) {
 		Window.create(width, height, title);
 		run();
 		Window.destroy();

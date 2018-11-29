@@ -15,7 +15,7 @@ public class Main implements GameEngine{
 	}
 
 	@Override
-	public void addStuff(List<GameObject> objects, List<Light> lights, String[] names) {
+	public void addStuff(List<GameObject> objects, List<Light> lights, String[] skyBoxTexNames) {
 		for (int i = 0; i < names.length; i++) {
 			names[i] = i + "";
 		}
@@ -26,6 +26,14 @@ public class Main implements GameEngine{
 
 	@Override
 	public void addShaders(MasterShader r) {
+		
+	}
+
+	@Override
+	public void transform(List<GameObject> objects) {
+		for (GameObject object : objects) {
+			object.rotation.y += 0.05f;
+		}
 		
 	}
 

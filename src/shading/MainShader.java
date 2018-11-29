@@ -1,23 +1,15 @@
 package shading;
 
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glDisable;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Matrix4f;
-import org.joml.Vector3f;
 import org.lwjgl.opengl.GL30;
 
-import core.Loader;
-import core.Window;
 import render.LightManager;
 import render.ShaderUtils;
 import render.VAO;
-import structures.Camera;
 import structures.GameObject;
-import structures.Light;
 
 public class MainShader extends Shader{
 	private static Matrix4f model;
