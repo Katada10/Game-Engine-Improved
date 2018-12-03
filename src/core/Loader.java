@@ -151,7 +151,7 @@ public class Loader {
 		return ret;
 	}
 
-	public static GameObject loadModel(String name, String texName) {
+	public static GameObject loadModel(String name, String texName, String objName) {
 		BufferedReader br;
 		String line;
 		String[] c;
@@ -237,6 +237,6 @@ public class Loader {
 		float[] v = toArr(vertices), t = toArr2f(textures), n = toArr(normals);
 		int[] ind = toIArr(indices);
 		
-		return new GameObject(new Model(v, t, n, ind), loadData(texName));
+		return new GameObject(new Model(v, t, n, ind), loadData(texName), objName);
 	}
 }

@@ -36,6 +36,7 @@ public interface GameEngine {
 	
 		GL30.glEnable(GL30.GL_CULL_FACE);
 		GL30.glEnable(GL30.GL_DEPTH_TEST);
+		
 		while (!glfwWindowShouldClose(Window.window)) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			GL30.glCullFace(GL30.GL_BACK);
