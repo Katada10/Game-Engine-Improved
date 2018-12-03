@@ -1,5 +1,6 @@
 package shading;
 
+import core.GameEngine;
 import core.Loader;
 
 public abstract class Shader {
@@ -11,6 +12,6 @@ public abstract class Shader {
 		progId = Loader.loadShaders(vert, frag);
 	}
 	
-	public abstract void render();
+	public abstract void render(GameEngine gameEngine);
 	public abstract void clean();
 }

@@ -2,7 +2,7 @@ package shading;
 
 import static org.lwjgl.opengl.GL30.*;
 
-
+import core.GameEngine;
 import core.Loader;
 import render.ShaderUtils;
 import render.VAO;
@@ -79,7 +79,7 @@ public class SkyBoxShader extends Shader{
 	    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 	
-	public void render()
+	public void render(GameEngine e)
 	{
 		glDisable(GL_CULL_FACE);
 		ShaderUtils.project(progId);

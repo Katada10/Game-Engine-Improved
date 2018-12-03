@@ -23,12 +23,12 @@ public interface GameEngine {
 	
 	public void addStuff(List<GameObject> objects, List<Light> lights, String[] skyBoxTexNames);
 	public void addShaders(MasterShader r);
-	public void transform(List<GameObject> objects);
+	public void transform(GameObject object);
 	
-	private void run() {
+	default void run(boolean useSkyBox) {
 		addStuff(objects, lights, names);
 
-		MasterShader r = new MasterShader(objects, lights, names);
+		MasterShader r = new MasterShader(objects, lights, names, useSkyBox);
 
 		addShaders(r);
 		
@@ -40,18 +40,20 @@ public interface GameEngine {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			GL30.glCullFace(GL30.GL_BACK);
 
-			transform(objects);
-			r.render();
+			
+			r.render(this);
 
 			glfwSwapBuffers(Window.window);
 
 			glfwPollEvents();
 		}
+		r.cleanUp();
 	}
-
-	default void start(int width, int height, String title) {
+	
+	
+	default void start(int width, int height, String title, boolean useSkyBox) {
 		Window.create(width, height, title);
-		run();
+		run(useSkyBox);
 		Window.destroy();
 	}
 

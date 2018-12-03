@@ -6,6 +6,7 @@ import java.util.List;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL30;
 
+import core.GameEngine;
 import render.LightManager;
 import render.ShaderUtils;
 import render.VAO;
@@ -26,7 +27,7 @@ public class MainShader extends Shader{
 		bind();
 	}
 	
-	public void render()
+	public void render(GameEngine e)
 	{
 		GL30.glEnable(GL_CULL_FACE);
 		ShaderUtils.project(progId);
@@ -34,6 +35,7 @@ public class MainShader extends Shader{
 		lightManager.uploadLights(progId);
 		for(GameObject o : objects)
 		{
+			e.transform(o);
 			model(o);
 			VAO.render(o.getModel());
 		}
@@ -48,6 +50,7 @@ public class MainShader extends Shader{
 	}
 
 	private void model(GameObject o) {
+		
 		model.identity().translate(o.position).rotateX(o.rotation.x).rotateY(o.rotation.y).rotateZ(o.rotation.z)
 				.scale(o.scale);
 

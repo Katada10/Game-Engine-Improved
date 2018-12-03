@@ -3,6 +3,7 @@ package shading;
 import java.util.*;
 import org.lwjgl.opengl.GL20;
 
+import core.GameEngine;
 import render.LightManager;
 import render.VAO;
 import structures.GameObject;
@@ -12,25 +13,29 @@ public class MasterShader {
 
 	private List<Shader> shaders;
 	private LightManager lightManager;
+	
 
-	public MasterShader(List<GameObject> objects, List<Light> lights, String[] skyBoxNames) {
+	public MasterShader(List<GameObject> objects, List<Light> lights, String[] skyBoxNames, boolean useSkyBox) {
 		shaders = new ArrayList<>();
 		lightManager = new LightManager(lights);
 		
 		VAO.init();
 
 		addShader(new MainShader(objects, lightManager, "main/vert", "main/frag"));
-		addShader(new SkyBoxShader("skybox/vert", "skybox/frag", skyBoxNames));
+
+		if (useSkyBox) {
+			addShader(new SkyBoxShader("skybox/vert", "skybox/frag", skyBoxNames));
+		}
 	}
 
 	public void addShader(Shader shader) {
 		shaders.add(shader);
 	}
 
-	public void render() {
+	public void render(GameEngine gameEngine) {
 		for (Shader shader : shaders) {
 			GL20.glUseProgram(shader.progId);
-			shader.render();
+			shader.render(gameEngine);
 		}
 	}
 
