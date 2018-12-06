@@ -44,14 +44,14 @@ public class VAO {
 		return vbo;
 	}
 
-	public static void render(int vbo, float[] data)
+	public static void render(int vbo, float[] data, int arrayIndex)
 	{
-		GL30.glEnableVertexAttribArray(3);
+		GL30.glEnableVertexAttribArray(arrayIndex);
 		
 		GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, vbo);
 		GL30.glDrawArrays(GL30.GL_TRIANGLES, 0, data.length / 3);
 
-		GL30.glDisableVertexAttribArray(3);
+		GL30.glDisableVertexAttribArray(arrayIndex);
 	}
 	
 	public static void render(Model o)

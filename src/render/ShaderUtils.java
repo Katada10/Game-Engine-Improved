@@ -17,6 +17,7 @@ public class ShaderUtils {
 	public static Matrix4f projection = new Matrix4f();
 	public static Matrix4f view = new Matrix4f();
 	public static Matrix4f skyView = new Matrix4f();
+	
 
 	public static void uploadUni(String name, float val, int id) {
 		int location = GL30.glGetUniformLocation(id, name);

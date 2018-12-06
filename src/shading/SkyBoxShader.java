@@ -85,7 +85,7 @@ public class SkyBoxShader extends Shader{
 		ShaderUtils.project(progId);
 		ShaderUtils.skyView(progId);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, tbo);
-		VAO.render(vbo, verts);
+		VAO.render(vbo, verts, 3);
 	}
 
 	@Override
