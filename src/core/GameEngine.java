@@ -10,8 +10,10 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 
 import org.lwjgl.opengl.GL30;
 
+import render.MasterShader;
+
 import java.util.*;
-import shading.MasterShader;
+
 import structures.GameObject;
 import structures.Light;
 

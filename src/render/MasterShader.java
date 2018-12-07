@@ -1,11 +1,12 @@
-package shading;
+package render;
 
 import java.util.*;
 import org.lwjgl.opengl.GL20;
 
 import core.GameEngine;
-import render.LightManager;
-import render.VAO;
+import shading.MainShader;
+import shading.Shader;
+import shading.SkyBoxShader;
 import structures.GameObject;
 import structures.Light;
 

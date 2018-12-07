@@ -5,8 +5,8 @@ import java.util.List;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
-import shading.MasterShader;
-import shading.PlainShader;
+import render.MasterShader;
+import shading.PrimitiveShader;
 import structures.GameObject;
 import structures.Light;
 
@@ -20,7 +20,7 @@ public class Main implements GameEngine{
 
 	@Override
 	public void addShaders(MasterShader r) {
-		r.addShader(new PlainShader("plain/vert", "plain/frag"));
+		r.addShader(new PrimitiveShader("plain/vert", "plain/frag"));
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class VAO {
 		GL30.glVertexAttribPointer(index, size, type, false, 0, 0);
 	}
 
-	private static int loadInt(int[] data) {
+	public static int loadInt(int[] data) {
 		int vbo = GL30.glGenBuffers();
 		GL30.glBindBuffer(GL30.GL_ELEMENT_ARRAY_BUFFER, vbo);
 		GL30.glBufferData(GL30.GL_ELEMENT_ARRAY_BUFFER, data, GL30.GL_STATIC_DRAW);

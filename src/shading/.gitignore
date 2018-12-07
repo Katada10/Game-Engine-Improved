@@ -4,3 +4,5 @@
 /Shader.class
 /MeshCreator.class
 /PlainShader.class
+/FontShader.class
+/PrimitiveShader.class
