@@ -1,8 +1,9 @@
-package shading;
+package font;
 
 import core.GameEngine;
 import render.ShaderUtils;
 import render.VAO;
+import shading.Shader;
 import structures.Primitive;
 import structures.Quad;
 
@@ -15,24 +16,21 @@ import java.util.List;
 
 import org.joml.Matrix4f;
 
-public class PrimitiveShader extends Shader {
+public class FontMeshShader extends Shader {
 	
 	private static List<Primitive> primitives;
 	private Matrix4f model;
 	
-	public PrimitiveShader(String vert, String frag) {
+	public FontMeshShader(String vert, String frag) {
 		super(vert, frag);
 		model = new Matrix4f();
 		primitives = new ArrayList<>();
-		
-		primitives.add(new Quad());
 	}
 	
-	
-	private void model(Primitive quad)
+	private void model(Primitive prim)
 	{
-		model.identity().translate(quad.position).rotateX(quad.rotation.x).rotateY(quad.rotation.y).rotateZ(quad.rotation.z)
-		.scale(quad.scale);
+		model.identity().translate(prim.position).rotateX(prim.rotation.x).rotateY(prim.rotation.y).rotateZ(prim.rotation.z)
+		.scale(prim.scale);
 
 		ShaderUtils.uploadMat("model", model, progId);
 	}

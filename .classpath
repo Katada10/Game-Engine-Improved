@@ -18,7 +18,5 @@
 	<classpathentry kind="lib" path="lib/lwjgl-stb-natives-windows.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl-stb.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
-	<classpathentry kind="lib" path="C:/Users/katad/Downloads/gdx-freetype.jar"/>
-	<classpathentry kind="lib" path="C:/Users/katad/Downloads/gdx-freetype-natives.jar"/>
 	<classpathentry kind="output" path="src"/>
 </classpath>
