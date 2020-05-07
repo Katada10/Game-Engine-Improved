@@ -12,6 +12,6 @@ public abstract class Shader {
 		progId = Loader.loadShaders(vert, frag);
 	}
 	
-	public abstract void render(GameEngine gameEngine);
+	public abstract void render();
 	public abstract void clean();
 }

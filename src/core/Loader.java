@@ -237,6 +237,6 @@ public class Loader {
 		float[] v = toArr(vertices), t = toArr2f(textures), n = toArr(normals);
 		int[] ind = toIArr(indices);
 		
-		return new GameObject(new Model(v, t, n, ind), loadData(texName), objName);
+		return new GameObject(new Model(v, t, n, ind), loadData(texName));
 	}
 }

@@ -4,14 +4,13 @@ import static org.lwjgl.opengl.GL30.*;
 
 import core.GameEngine;
 import core.Loader;
-import render.ShaderUtils;
 import render.VAO;
 import structures.Texture;
 
 public class SkyBoxShader extends Shader{
 
 	private int vbo, tbo;
-	private String[] fileNames;
+	private String[] fileNames = {"0", "1", "2", "3", "4", "5"};
 	
 	private float[] verts = {
 			-50.0f,  50.0f, -50.0f,
@@ -57,10 +56,9 @@ public class SkyBoxShader extends Shader{
 		     50.0f, -50.0f,  50.0f
 	};
 	
-	public SkyBoxShader(String vertPath, String fragPath, String[] fileNames)
+	public SkyBoxShader(String vertPath, String fragPath)
 	{
 		super(vertPath, fragPath);
-		this.fileNames = fileNames;
 		vbo = VAO.loadFloat(verts, 3, 3);
 		loadCubeMap();
 	}
@@ -79,7 +77,7 @@ public class SkyBoxShader extends Shader{
 	    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 	
-	public void render(GameEngine e)
+	public void render()
 	{
 		glDisable(GL_CULL_FACE);
 		ShaderUtils.project(progId);

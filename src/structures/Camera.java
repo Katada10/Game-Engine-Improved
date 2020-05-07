@@ -30,20 +30,16 @@ public class Camera {
 	
 	public void move()
 	{
-		if(getKey(GLFW_KEY_A))
+		if(getKey(GLFW_KEY_S))
 		{
-			position.x  -= 0.1f;
-		}if(getKey(GLFW_KEY_S))
-		{
-			position.z += 0.1f;
+			position.z += 0.1f * Math.cos(rotation.y);
+			position.x -= 0.1f * Math.sin(rotation.y);
 		}
-		if(getKey(GLFW_KEY_D))
-		{
-			position.x += 0.1f;
-		}
+		
 		if(getKey(GLFW_KEY_W))
 		{
-			position.z -= 0.1f;
+			position.z -= 0.1f * Math.cos(rotation.y);
+			position.x += 0.1f * Math.sin(rotation.y);
 		}
 		if(getKey(GLFW_KEY_Z))
 		{

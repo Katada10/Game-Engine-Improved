@@ -6,7 +6,6 @@ public class Model {
 	private float[] verts, texCoords, norms;
 	
 	public Model(float[] verts, float[] texCoords, float[] norms, int[] ind) {
-		super();
 		this.verts = verts;
 		this.texCoords = texCoords;
 		this.norms = norms;

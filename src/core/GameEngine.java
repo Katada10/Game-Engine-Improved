@@ -8,9 +8,11 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL30;
 
-import render.MasterShader;
+import render.Renderer;
+import shading.SkyBoxShader;
 
 import java.util.*;
 
@@ -19,21 +21,20 @@ import structures.Light;
 
 public interface GameEngine {
 
-	List<GameObject> objects = new ArrayList<>();
-	List<Light> lights = new ArrayList<>();
-	String[] names = new String[6];
+	public static List<GameObject> objects = new ArrayList<>();
 	
-	public void addStuff(List<GameObject> objects, List<Light> lights, String[] skyBoxTexNames);
-	public void addShaders(MasterShader r);
-	public void transform(GameObject object);
-	
-	default void run(boolean useSkyBox) {
-		addStuff(objects, lights, names);
-
-		MasterShader r = new MasterShader(objects, lights, names, useSkyBox);
-
-		addShaders(r);
+	private static void addStuff() {
+		objects.add(new Light(new Vector3f(1, 10, 3), 10, 1));
 		
+		objects.add(Loader.loadModel("cube", "texture.jpg", "Monkey"));
+	}
+
+	
+	private static void run() {
+		addStuff();
+
+		Renderer r = new Renderer(true);
+
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	
 		GL30.glEnable(GL30.GL_CULL_FACE);
@@ -44,7 +45,7 @@ public interface GameEngine {
 			GL30.glCullFace(GL30.GL_BACK);
 
 			
-			r.render(this);
+			r.render();
 
 			glfwSwapBuffers(Window.window);
 
@@ -54,9 +55,9 @@ public interface GameEngine {
 	}
 	
 	
-	default void start(int width, int height, String title, boolean useSkyBox) {
+	public static void start(int width, int height, String title) {
 		Window.create(width, height, title);
-		run(useSkyBox);
+		run();
 		Window.destroy();
 	}
 
